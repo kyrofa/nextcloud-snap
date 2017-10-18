@@ -3,6 +3,11 @@
 . $SNAP/utilities/https-utilities
 . $SNAP/utilities/apache-utilities
 . $SNAP/utilities/php-utilities
+. $SNAP/utilities/hook-utilities
+
+# Make sure the configure hook isn't running (otherwise we'll run on old
+# configuration data)
+wait_for_configure_hook
 
 params=""
 if certificates_are_active; then
