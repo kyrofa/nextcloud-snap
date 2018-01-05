@@ -175,6 +175,7 @@ parts:
       - --enable-intl
       - --enable-pcntl
       - --with-jpeg-dir=/usr/lib
+      - --with-ldap-libs=/usr/lib/x86_64-linux-gnu
       - --disable-rpath
     stage-packages:
       # These are only included here until the OS snap stabilizes
@@ -187,6 +188,7 @@ parts:
       - libjpeg9-dev
       - libbz2-dev
       - libmcrypt-dev
+      - libldap2-dev
     prime:
      - -sbin/
      - -etc/
