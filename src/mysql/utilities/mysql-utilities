@@ -7,8 +7,10 @@ MYSQL_SETUP_LOCKFILE="/tmp/locks/mysql-setup"
 
 mkdir -p "$(dirname "$MYSQL_PIDFILE")"
 mkdir -p "$(dirname "$MYSQL_SOCKET")"
+mkdir -p "$(dirname "$MYSQL_SETUP_LOCKFILE")"
 chmod 750 "$(dirname "$MYSQL_PIDFILE")"
 chmod 750 "$(dirname "$MYSQL_SOCKET")"
+chmod 750 "$(dirname "$MYSQL_SETUP_LOCKFILE")"
 
 mysql_is_running()
 {
