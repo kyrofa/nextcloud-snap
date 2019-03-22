@@ -31,6 +31,7 @@ jobs:
      - run:
          # Install and run the review tools on the resulting snap
          command: |
+           while sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do sleep 1; done
            sudo apt update -qq
            sudo apt install -y snapd
            sudo snap install --beta review-tools
@@ -55,6 +56,7 @@ jobs:
       - run:
           # Install the snap and create an admin user
           command: |
+            while sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do sleep 1; done
             sudo apt update -qq
             sudo apt install -y snapd
             sudo snap install --edge nextcloud
@@ -73,6 +75,7 @@ jobs:
       - run:
           # Install the snap and create an admin user
           command: |
+            while sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do sleep 1; done
             sudo apt update -qq
             sudo apt install -y snapd
             sudo snap install nextcloud --channel=13/edge
@@ -91,6 +94,7 @@ jobs:
       - run:
           # Install the snap and create an admin user
           command: |
+            while sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do sleep 1; done
             sudo apt update -qq
             sudo apt install -y snapd
             sudo snap install nextcloud --channel=14/edge
@@ -109,6 +113,7 @@ jobs:
       - run:
           # Install the snap and create an admin user
           command: |
+            while sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do sleep 1; done
             sudo apt update -qq
             sudo apt install -y snapd
             sudo snap install nextcloud --channel=15/edge
