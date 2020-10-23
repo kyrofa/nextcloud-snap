@@ -20,6 +20,14 @@ trap 'rm -f "$configuration_file"' EXIT
 
 envsubst < "$SNAP/config/logrotate/logrotate.conf" > "$configuration_file"
 
+# Run logrotate in debug mode. It won't do any rotations, but it WILL check the
+# status file and exit non-zero if it's invalid, which gives us an opportunity
+# to print an invalid file.
+if ! logrotate --debug --verbose --state "$LOGROTATE_STATUS_FILE" "$configuration_file" > /dev/null 2>&1; then
+    echo "!!!!!!!!!! Invalid status file !!!!!!!!!!"
+    cat "$LOGROTATE_STATUS_FILE"
+fi
+
 # If logrotate fails, it could be due to corruption in the status file. Try
 # removing it so we start with a clean slate next time around.
 if ! logrotate --verbose --state "$LOGROTATE_STATUS_FILE" "$configuration_file"; then
