@@ -163,6 +163,7 @@ parts:
       - slotmem_shm
       - log_config
       - logio
+      - md
 
     filesets:
       exclude:
@@ -181,6 +182,27 @@ parts:
       - $exclude
     prime:
       - $exclude
+    build-packages:
+      # Required by mod_md
+      - libjansson-dev
+    stage-packages:
+      # Required by mod_md
+      - libjansson4
+      - libasn1-8-heimdal
+      - libcurl4
+      - libgssapi3-heimdal
+      - libhcrypto4-heimdal
+      - libheimbase1-heimdal
+      - libheimntlm0-heimdal
+      - libhx509-5-heimdal
+      - libkrb5-26-heimdal
+      - libldap-2.4-2
+      - libnghttp2-14
+      - libpsl5
+      - libroken18-heimdal
+      - librtmp1
+      - libsasl2-2
+      - libwind0-heimdal
 
   apache-customizations:
     plugin: dump
@@ -424,18 +446,6 @@ parts:
   delay-on-failure:
     plugin: dump
     source: src/delay-on-failure/
-
-  certbot:
-    plugin: python
-    python-version: python2
-    source: src/https/
-    requirements: ["requirements.txt"]
-    build-packages: [libffi-dev]
-    after: [patches]
-    override-build: |
-      snapcraftctl build
-      patch -p1 -d $SNAPCRAFT_PART_INSTALL/lib/python2.7/site-packages/certbot < $SNAPCRAFT_STAGE/certbot-remove-default-config-files.patch
-      patch -p1 -d $SNAPCRAFT_PART_INSTALL/lib/python2.7/site-packages/certbot < $SNAPCRAFT_STAGE/certbot-remove-storage-chown.patch
 
   setup-https:
     plugin: dump
